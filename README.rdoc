@@ -7,7 +7,7 @@ and show burndown chart with the RGraph(http://www.rgraph.net/) library.
 
 1. change database connection settings in the file config/config.php
 
-2. import the config/init_tables.sql into your MySQL server. 
+2. import the config/init_tables.sql file into your MySQL server. 
 
 == Usage
 
@@ -18,3 +18,5 @@ and show burndown chart with the RGraph(http://www.rgraph.net/) library.
 3. create a new sprint based on a project
 
 4. create some burndown items day by day
+
+5. have fun!

@@ -64,8 +64,8 @@ if ($sprintId) {
 		drawChart({
 			hours: <?php echo json_encode($hours) ?>,
 				labels: <?php echo json_encode($days) ?>,
-				title: '<?php echo $sprint['name'] ?>',
-				colors: ['green', 'red']
+				title: '<?php echo get_project_name_by_project_id($projects, $sprint['project_id']) . ': ' . $sprint['name'] ?>',
+				colors: ['gray', 'green']
 		}).Draw();
 	};
     </script>
