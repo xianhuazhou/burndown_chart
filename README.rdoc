@@ -1,0 +1,20 @@
+== Introduction
+
+It's a simple PHP/MySQL web application which can manage some data for the Scrum burndown chart, 
+and show burndown chart with the RGraph(http://www.rgraph.net/) library.
+
+== Installation
+
+1. change database connection settings in the file config/config.php
+
+2. import the config/init_table.sql into your MySQL server. 
+
+== Usage
+
+1. open browser with the url http://YOUR-HOST/burndown_chart/
+
+2. create a project
+
+3. create a new sprint based on a project
+
+4. create some burndown items day by day
