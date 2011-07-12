@@ -84,7 +84,7 @@ if ($sprintId) {
     <form method="post" action="<?php echo $thisPage ?>?action=create_project">
 		<fieldset>
 	       <legend>Create a new project:</legend>
-		   name: <input type="text" name="name">&nbsp;<input type="submit" value="Create Project">
+		   Name: <input type="text" name="name">&nbsp;<input type="submit" value="Create Project">
        </fieldset>
     </form>
 
@@ -115,7 +115,7 @@ if ($sprintId) {
 			   <?php endforeach; ?>
 			   </select> <input type="button" value="Show Burndown" onclick="var select = document.getElementById('sprint_id'); window.location.href='<?php echo $thisPage ?>?sprint_id=' + select.options[select.selectedIndex].value"><br>
 			   Date: <input type="text" name="day"><br>
-			   Burned hours: <input type="text" name="burned_hours"><br>
+			   Burned Hours: <input type="text" name="burned_hours"><br>
 			  <input type="submit" value="Create burndown item">
 			</fieldset>
 		</form>
