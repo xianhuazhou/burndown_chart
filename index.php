@@ -122,7 +122,7 @@ if ($sprintId) {
 	<?php endif; ?>
 
   <div id="chart">
-    <canvas id="g" width="1024" height="400"></canvas>
+    <canvas id="g" width="1024" height="500"></canvas>
   </div>
 
    <div style="text-align: center"><a href="http://www.rgraph.net" target="_blank"> RGraph: HTML5 canvas graph library </a></div>
