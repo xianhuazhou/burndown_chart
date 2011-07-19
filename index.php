@@ -1,5 +1,6 @@
 <?php 
 require_once 'config/config.php';
+$title = null;
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 $sprintId = isset($_GET['sprint_id']) ? $_GET['sprint_id'] : null;
 $thisPage = $_SERVER['PHP_SELF'];
@@ -11,7 +12,9 @@ case 'create_project':
 
 case 'create_sprint':
 	$sprint = new Sprint($_POST['project_id'], $_POST['name'], $_POST['start_date'], $_POST['end_date'], $_POST['hours']);
-	$sprint->save();
+	$sprintId = $sprint->save();
+	$burndown = new Burndown($sprintId, $_POST['start_date'], 0);
+	$burndown->save();
 	break;
 
 case 'create_burndown':
@@ -46,13 +49,15 @@ if ($sprintId) {
 	foreach ($days as $k => $day) {
 		$days[$k] = substr($day, 5);
 	}
+
+    $title = get_project_name_by_project_id($projects, $sprint['project_id']) . ': ' . $sprint['name'];
 }
 ?>
 <!DOCTYPE html >
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Sprint burndown charts</title>
+    <title>Burndown chart<?php echo $title ? ' - ' . $title : '' ?></title>
     <script src="javascripts/RGraph.common.core.js" ></script>
     <script src="javascripts/RGraph.common.context.js" ></script>
     <script src="javascripts/RGraph.line.js" ></script>
@@ -64,7 +69,7 @@ if ($sprintId) {
 		drawChart({
 			hours: <?php echo json_encode($hours) ?>,
 				labels: <?php echo json_encode($days) ?>,
-				title: '<?php echo get_project_name_by_project_id($projects, $sprint['project_id']) . ': ' . $sprint['name'] ?>',
+				title: '<?php echo $title ?>',
 				colors: ['gray', 'green']
 		}).Draw();
 	};
@@ -94,7 +99,7 @@ if ($sprintId) {
 				   <legend>Start a new Sprint:</legend>
 				   Project: <select size="1" name="project_id">
 				   <?php foreach ($projects as $project): ?>
-					   <option value="<?php echo $project['name'] ?>"><?php echo $project['name'] ?></option>
+					   <option value="<?php echo $project['id'] ?>"><?php echo $project['name'] ?></option>
 				   <?php endforeach; ?>
 				   </select><br>
 				   Name: <input type="text" name="name"><br>

@@ -13,7 +13,7 @@ class Project {
 		$stmt->execute(array($this->name, date('Y-m-d H:i:s')));
 	}
 
-	public function getProjects() {
+	public static function getProjects() {
 		$stmt = DB::getPDO()->prepare("SELECT * FROM projects");
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);

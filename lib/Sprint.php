@@ -19,7 +19,8 @@ class Sprint {
 	public function save() {
 		$stmt = $this->pdo->prepare("INSERT INTO sprints(project_id, name, start_date, end_date, hours, created_at) 
 			VALUES(?, ?, ?, ?, ?, ?)");
-		return $stmt->execute(array($this->projectId, $this->name, $this->startDate, $this->endDate, $this->hours, date('Y-m-d H:i:s')));
+		$stmt->execute(array($this->projectId, $this->name, $this->startDate, $this->endDate, $this->hours, date('Y-m-d H:i:s')));
+        return $this->pdo->lastInsertId();
 	}
 
 	public static function getSprintById($id) {
