@@ -38,7 +38,11 @@ if ($sprintId) {
 	$burndownItems = Burndown::getRowsBySprintId($sprintId);
 
 	$hours = array();
-	foreach ($days as $day) {
+	foreach ($days as $k => $day) {
+		if (date('N', strtotime($day)) > 5) { 
+			unset($days[$k]);
+			continue;
+		}
 		if (isset($burndownItems[$day])) {
 			$hours[] = $burndownItems[$day];
 		} else {
@@ -47,8 +51,14 @@ if ($sprintId) {
 	}
 
 	foreach ($days as $k => $day) {
+		if (date('N', strtotime($day)) > 5) { 
+			unset($days[$k]);
+			continue;
+		}
 		$days[$k] = substr($day, 5);
 	}
+
+	$days = array_values($days);
 
     $title = get_project_name_by_project_id($projects, $sprint['project_id']) . ': ' . $sprint['name'];
 }
